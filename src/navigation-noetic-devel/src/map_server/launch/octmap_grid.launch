@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="octomap_server" type="octomap_server_node" name="octomap_server"> 
+            <param name="resolution" value="0.05" />
+            <param name="frame_id" type="string" value="map" />
+            <!-- 设置最大高度，超过部分忽略 -->
+            <param name="height" value="0.5" />
+            <remap from="cloud_in" to="/cloud_registered" />
+            <param name="latch" value="true" />
+            <!-- 发布二维地图 -->
+            <param name="publish_2d_map" value="true" />
+    
+    
+    </node>
+
+</launch>

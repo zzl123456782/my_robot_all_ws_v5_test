@@ -1,0 +1,15 @@
+<launch>
+  <!-- 底盘驱动节点 - 通过USB-CAN进行通信 -->
+  <!-- 功能: 发布里程计数据, 接收cmd_vel控制底盘 -->
+  
+  <node pkg="chassis_driver" type="chassis_driver_node" name="chassis_driver_node" output="screen">
+    <!-- 轮距参数 (m) -->
+    <param name="track_width" value="0.3"/>
+    
+    <!-- 轮子半径 (m) -->
+    <param name="wheel_radius" value="0.0535"/>
+    
+    <!-- 里程计发布频率 (Hz) -->
+    <param name="odom_rate" value="50.0"/>
+  </node>
+</launch>

@@ -1,0 +1,14 @@
+<launch>
+    <!-- 设置地图的配置文件 -->
+    <arg name="map" default="nav.yaml" />
+    <!-- 运行地图服务器，并且加载设置的地图-->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find map_server)/launch/$(arg map)"/>
+    <!-- 启动AMCL节点 -->
+    <include file="$(find amcl)/examples/amcl_diff.launch" />
+
+    <!-- 运行move_base节点 -->
+    <include file="$(find move_base)/launch/use_my_local_planner_ekf_and_carto.launch" />
+    <!-- 运行rviz -->
+    <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find move_base)/rviz/my_robot_nav.rviz" />
+
+</launch>

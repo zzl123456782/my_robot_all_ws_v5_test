@@ -1,0 +1,30 @@
+<launch>
+   <param name="/use_sim_time" value="true"/>
+   
+   <arg name="configuration_basename" default="backpack_2d_localization.lua"/>
+
+    <!--运行cartographer_node-->
+    <node pkg="cartographer_ros" type="cartographer_node" name="cartographer_node" 
+        args="-configuration_directory $(find cartographer_ros)/configuration_files
+              -configuration_basename $(arg configuration_basename)
+              -load_state_filename /home/xiaocaiji/桌面/my_robot_ws—1.06/src/navigation-noetic-devel/src/move_base/data/map.pbstream
+        " 
+        output="screen">
+        <remap from="/echoes" to="/scan"/>
+        <!-- <remap from="/imu" to="/flat_imu"/> -->
+        <!-- <remap from="odom" to="odometry/filtered" /> -->
+    </node>
+    <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+      type="cartographer_occupancy_grid_node" args="-resolution 0.05 " />
+
+    <node pkg="tf" type="static_transform_publisher" name="gyro_to_base"
+      args="0 0 0 0 0 0 base_link gyro_link 100" />
+      
+
+
+    <!-- 运行move_base节点 -->
+    <include file="$(find move_base)/launch/use_my_local_planner_carto.launch" />
+    <!-- 运行rviz -->
+    <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find move_base)/rviz/my_robot_nav.rviz" />
+
+</launch>

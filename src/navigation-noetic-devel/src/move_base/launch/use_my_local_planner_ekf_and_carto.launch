@@ -1,0 +1,20 @@
+<launch>
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen" clear_params="true">
+        <!-- 规划器类型通常放在参数文件中，或者统一在参数文件中设置 -->
+        
+        <!-- 加载基础参数 -->
+        <!-- <rosparam file="$(find move_base)/param/move_base_params.yaml" command="load" /> -->
+        
+        <!-- 加载代价地图通用参数 -->
+        <rosparam file="$(find move_base)/param/cartographer_params/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find move_base)/param/cartographer_params/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        
+        <!-- 加载特定代价地图参数 -->
+        <rosparam file="$(find move_base)/param/ekf_localization_params/local_costmap_ekf_params.yaml" command="load" />
+        <rosparam file="$(find move_base)/param/ekf_localization_params/global_costmap_params.yaml" command="load" />
+        
+        <!-- 加载规划器参数 -->
+        <param name="base_local_planner" value="my_ekf_local_planner/MyEkfLocalPlanner"/>
+
+    </node>
+</launch>

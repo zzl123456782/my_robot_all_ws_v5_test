@@ -1,0 +1,20 @@
+<launch>
+
+    <!-- 启动SLAM节点 -->
+     <!--<include file="$(find map_server)/launch/slam_gmapping.launch" /> -->
+    
+
+    <include file="$(find map_server)/launch/piontcloud_to_laserscan2.launch" />
+    <!-- 运行move_base节点 -->
+    <include file="$(find move_base)/launch/move_base2.launch" />
+    
+    
+    
+    
+    <!-- 运行rviz >
+    <node pkg="rviz" type="rviz" name="slam_rviz" args="-d $(find move_base)/rviz/nav.rviz" /-->
+
+
+
+
+</launch>

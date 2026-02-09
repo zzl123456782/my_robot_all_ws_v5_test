@@ -1,0 +1,19 @@
+<launch>
+  <!-- ============================================ -->
+  <!-- 机器人驱动统一启动文件                         -->
+  <!-- 包含: 雷达驱动, IMU驱动, 底盘驱动              -->
+  <!-- ============================================ -->
+
+  <!-- 雷达驱动 - 镭神 N10 -->
+  <include file="$(find lslidar_driver)/launch/lslidar_x10.launch">
+    <!-- 可在此覆盖默认参数 -->
+    <!-- <arg name="device_ip" value="192.168.1.200"/> -->
+  </include>
+
+  <!-- IMU 驱动 - FDI-Link AHRS -->
+  <include file="$(find fdilink_ahrs)/launch/ahrs_data.launch"/>
+
+  <!-- 底盘驱动 - USB-CAN -->
+  <include file="$(find chassis_driver)/launch/chassis_driver.launch"/>
+
+</launch>

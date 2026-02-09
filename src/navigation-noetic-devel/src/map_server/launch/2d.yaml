@@ -1,0 +1,5 @@
+image: /home/xiaocaiji/zzl/my_robot_ws_1.09/src/navigation-noetic-devel/src/map_server/launch/2d.pgm
+origin: [-7.99554, -16.9176, 0.0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.196

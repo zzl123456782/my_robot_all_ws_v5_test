@@ -1,0 +1,7 @@
+<library path="lib/libmy_local_planner">
+ <class name="my_local_planner/MyLocalPlanner" type="my_local_planner::MyLocalPlanner" base_class_type="nav_core::BaseLocalPlanner">
+  <description>
+	 老子的局部规划器
+  </description>
+ </class>
+</library>

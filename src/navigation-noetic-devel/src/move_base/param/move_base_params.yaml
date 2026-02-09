@@ -1,0 +1,14 @@
+ move_base 核心参数
+move_base:
+
+  controller_frequency: 5.0           # 控制循环频率，降低到10Hz以减轻计算负担
+  planner_frequency: 1.0               # 全局规划频率，1Hz通常足够
+  oscillation_timeout: 0.0             # 振荡超时时间，0表示禁用
+  oscillation_distance: 0.0            # 振荡距离阈值，0表示禁用
+  planner_patience: 5.0                # 全局规划器重试等待时间
+  controller_patience: 3.0             # 局部规划器重试等待时间
+  max_planning_retries: 3              # 最大规划重试次数
+  conservative_reset_dist: 3.0         # 重置恢复行为的距离
+  recovery_behavior_enabled: true     # 启用恢复行为
+  clearing_rotation_allowed: true     # 允许清除旋转
+  shutdown_costmaps: false            # 关闭时是否关闭代价地图

@@ -1,0 +1,25 @@
+# move_base_params.yaml
+move_base:
+  # 增加TF容忍度
+  transform_tolerance: 0.5
+  controller_frequency: 5.0
+  planner_frequency: 1.0
+  
+  # 增加缓冲区长度
+  odom_topic: odom
+  use_dijkstra: true
+  
+  # 全局代价地图设置
+  global_costmap:
+    global_frame: map
+    robot_base_frame: base_footprint
+    transform_tolerance: 0.5
+    always_send_full_costmap: false
+    
+  # 局部代价地图设置
+  local_costmap:
+    global_frame: odom
+    robot_base_frame: base_footprint
+    transform_tolerance: 0.5
+    publish_frequency: 2.0
+    update_frequency: 5.0

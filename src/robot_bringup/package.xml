@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>robot_bringup</name>
+  <version>1.0.0</version>
+  <description>Robot bringup package for launching all drivers and algorithms</description>
+
+  <maintainer email="victor@robot.com">Victor</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  <exec_depend>chassis_driver</exec_depend>
+  <exec_depend>lslidar_driver</exec_depend>
+  <exec_depend>fdilink_ahrs</exec_depend>
+  <exec_depend>cartographer_ros</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+
+  <export>
+  </export>
+</package>

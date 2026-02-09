@@ -1,0 +1,11 @@
+<launch>
+    <node name="map_server" pkg="map_server" type="map_server" args="/home/xiaocaiji/zzl/my_robot_ws_1.09/src/navigation-noetic-devel/src/map_server/launch/nav.yaml"/>
+    <!-- 启动AMCL节点 -->
+    <include file="$(find amcl)/examples/amcl_diff.launch" />
+    <!-- <include file="$(find cartographer_ros)/launch/self_backpack_2d_localization.launch" /> -->
+    <!-- 运行move_base节点 -->
+    <include file="$(find move_base)/launch/use_my_local_planner.launch" />
+    <!-- 运行rviz -->
+    <node pkg="rviz" type="rviz" name="rviz"  args="-d $(find move_base)/rviz/my_robot_nav.rviz" />
+
+</launch>

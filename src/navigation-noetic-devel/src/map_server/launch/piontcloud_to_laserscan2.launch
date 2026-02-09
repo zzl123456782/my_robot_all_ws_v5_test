@@ -1,0 +1,65 @@
+<launch>
+    <!-- <param name="use_sim_time" value="true"/> -->
+    <!-- 点云转激光扫描节点 -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="cloud_to_scan">
+        <!-- 输入点云话题 -->
+        <remap from="cloud_in" to="/velodyne_points"/>
+        
+        <!-- 输出激光话题 -->
+        <remap from="scan" to="/scan"/>
+        
+        <!-- 核心参数 -->
+        <param name="target_frame" value="map"/>    <!-- 目标坐标系 -->
+        <param name="min_height" value="0.1"/>          <!-- 最低有效高度(m) -->
+        <param name="max_height" value="0.5"/>            <!-- 最高有效高度(m) -->
+        <param name="range_min" value="0.2"/>             <!-- 最小检测距离(m) -->
+        <param name="range_max" value="50.0"/>            <!-- 最大检测距离(m) -->
+        <param name="scan_time" value="0.1"/>             <!-- 扫描周期(s) -->
+        <param name="angle_min" value="-3.1416"/>          <!-- 最小扫描角(rad) -180° -->
+        <param name="angle_max" value="3.1416"/>           <!-- 最大扫描角(rad) 180° -->
+        <param name="angle_increment" value="0.0087"/>    <!-- 角度增量(约0.5°) -->
+    </node>
+    
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+      <remap from="scan" to="/scan"/>
+      <param name="base_frame" value="base_footprint"/><!--底盘坐标系-->
+      <param name="odom_frame" value="odom"/> <!--里程计坐标系-->
+      <param name="map_update_interval" value="5.0"/>
+      <param name="maxUrange" value="16.0"/>
+      <param name="sigma" value="0.05"/>
+      <param name="kernelSize" value="1"/>
+      <param name="lstep" value="0.05"/>
+      <param name="astep" value="0.05"/>
+      <param name="iterations" value="5"/>
+      <param name="lsigma" value="0.075"/>
+      <param name="ogain" value="3.0"/>
+      <param name="lskip" value="0"/>
+      <param name="srr" value="0.1"/>
+      <param name="srt" value="0.2"/>
+      <param name="str" value="0.1"/>
+      <param name="stt" value="0.2"/>
+      <param name="linearUpdate" value="1.0"/>
+      <param name="angularUpdate" value="0.5"/>
+      <param name="temporalUpdate" value="3.0"/>
+      <param name="resampleThreshold" value="0.5"/>
+      <param name="particles" value="30"/>
+      <param name="xmin" value="-50.0"/>
+      <param name="ymin" value="-50.0"/>
+      <param name="xmax" value="50.0"/>
+      <param name="ymax" value="50.0"/>
+      <param name="delta" value="0.05"/>
+      <param name="llsamplerange" value="0.01"/>
+      <param name="llsamplestep" value="0.01"/>
+      <param name="lasamplerange" value="0.005"/>
+      <param name="lasamplestep" value="0.005"/>
+    </node>
+    <!-- <node pkg="tf" type="static_transform_publisher" name="static_tf_map_to_odom"
+          args="0 0 0 0 0 0 odom base_footprint 100"/> -->
+    <!-- <node pkg="tf" type="static_transform_publisher" name="static_tf_base_footprint_to_base_link"
+          args="0 0 0 0 0 0  base_footprint base_link 1000"/> -->
+<!-- 
+    <nod>
+e pkg="tf" type="static_transform_publisher" name="static_tf_base_link_to_lidar"
+          args="0 0 0 0 0 0 base_link hesai_lidar 50"/> -->
+
+</launch>
