@@ -45,4 +45,24 @@
     更新时间：2026.02.03
 #修改
     1、修改多点导航程序，添加了目标点切换时间以及发布目标点时间频率
+
+    更新时间：2026.02.28
+#修改
+    1、修改自制局部路径规划中的前坛点数（从30降低到了15）；
+    2、修改了自己局部路进规划中的判断高代价地区的条件，去除掉了cost>200的情况，只有在cost>=253时触发；   
+    3、修改了多点巡航代码，添加了目标点到达的话题发布以及人声相应的标志位检测；
+    4、降低了局部代价地图的膨胀半径inflation_radius从0.55降低到0.35，缩短避障时的安全距离；
+
+更新时间：2026.03.01
+#地图构建
+    1、记得修改仿真时间为false
+    2、地图保存命令(
+        rosservice call /write_state "{filename: '/home/xiaocaiji/zzl/robot/my_robot_v06/src/cartographer_relocalization/src/cartographer_ros/cartographer_ros/map/2d.pbstream', include_unfinished_submaps: true}"
+    )
+    3、直接保存的地图不能在move_base中直接使用，需要使用命令转化一下(
+        rosrun cartographer_ros cartographer_pbstream_to_ros_map \-pbstream_filename (地图名字) \-map_filestem (转化的地图名字) \-resolution 0.05
+    )
+#修改
+    1、move_base源码中添加了触发恢复行为的行为标志id发布；
+    2、move_base源码中修改了重规划的逻辑，注释了重置计数的操作，避免影响恢复行为触发；
     
